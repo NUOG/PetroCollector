@@ -1,0 +1,15 @@
+{
+    "name": "nuog/petrocollector",
+    "description": "Petrophysical study of filtration-capacitive properties of rocks collectors",
+    "require": {
+        "twbs/bootstrap": "~3.3",
+        "jpgraph/jpgraph": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Igor Bronovskyi",
+            "email": "admin@brun.if.ua"
+        }
+    ]
+}
