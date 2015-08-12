@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" href="favicon.ico">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Петрофізичні дослідження фільтраційно-ємнісних властивостей порід колекторів</title>
-	<link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
-	<script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="vendor/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css">
+  <script type="text/javascript" src="vendor/components/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="vendor/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 </head>
 <body>
 
@@ -57,10 +61,11 @@
   </div>
   <div class="panel-body">
 
+  <form id="PetroCollectorForm">
 
   <div class="row">
 
-  	<div class="col-md-6">
+  	<div class="col-md-4">
   		<!-- dep 1 -->
 		<label class="control-label">
 			Залежність К<sub>п</sub> і К<sub>п.д</sub>
@@ -94,7 +99,7 @@
 
   	</div>
 
-  	<div class="col-md-6">
+  	<div class="col-md-4">
 
   		<!-- dep 4 -->
 		<label class="control-label">
@@ -119,11 +124,83 @@
   		
   	</div>
 
+    <div class="col-md-4">
+
+      <!-- dep 6 -->
+    <label class="control-label">
+      Залежність К<sub>пр.еф</sub> і К<sub>пр.еф</sub>
+    </label>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input type="radio" name="dependence-radio-1" id="dependence-radio-1" value="1"> К<sub>пр.еф</sub>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="dependence-radio-2" id="dependence-radio-2" value="2"> К<sub>пр.еф</sub>
+      </label>    
+    </div>  
+    <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" name="dependence-chb-6"> 
+      </span>
+      <input type="text" class="form-control" name="dependence-data-6">
+    </div><!-- /input-group -->     
+      <!-- dep 7 -->
+    <label class="control-label">
+      Залежність К<sub>п</sub> і К<sub>пр</sub>
+    </label>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input type="radio" name="dependence-radio-3" id="dependence-radio-3" value="3"> К<sub>п</sub>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="dependence-radio-4" id="dependence-radio-4" value="4"> К<sub>пр</sub>
+      </label>    
+    </div>      
+    <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" name="dependence-chb-7"> 
+      </span>
+      <input type="text" class="form-control" name="dependence-data-7">
+    </div><!-- /input-group -->     
+      
+    </div>
+
+
   	<div class="col-md-12">
+      <label class="control-label">
+        Виберіть таблицю дослідження
+      </label>
+      <div class="input-group">
+      <select class="form-control selectpicker show-tick" name="research">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+      </span>
+      </div>
+
+      <br />
+      <div class="btn-grout pull-right">
+        <button type="button" class="btn btn-default">
+          <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+          Очистити дані
+        </button>
+        <button type="button" class="btn btn-success">
+          <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+          Порахувати
+        </button>
+      </div>
 
   	</div>
 
   </div><!-- .end row -->
+  </form>
 
   </div>
   <div class="panel-footer">
@@ -131,9 +208,34 @@
   </div>
 </div>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Табличні значення</h3>
+  </div>
+  <div class="panel-body">
 
+  </div>
 
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Графіки</h3>
+  </div>
+  <div class="panel-body">
+
+  </div>
+
+</div>
+
+<footer class="container">
+    &copy; <a title="Розробка сайтів" href="http://brun.if.ua/">Ігор Броновський</a> 2015. Пропозиції/побажання залишайте <a href="http://brun.if.ua/contact">тут</a>. <br>
+    Допомогти чи приєднатись до розробки <a href="https://github.com/NUOG/PetroCollector">Github::PetroCollector</a>
+</footer>
+  
 </div> <!-- end .container -->
+
+
 
 </body>
 </html>

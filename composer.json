@@ -3,7 +3,10 @@
     "description": "Petrophysical study of filtration-capacitive properties of rocks collectors",
     "require": {
         "twbs/bootstrap": "~3.3",
-        "jpgraph/jpgraph": "dev-master"
+        "jpgraph/jpgraph": "dev-master",
+        "components/jquery": "^2.1",
+        "league/csv": "~7.1",
+        "bootstrap-select/bootstrap-select": "^1.7"
     },
     "license": "MIT",
     "authors": [
