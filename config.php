@@ -17,10 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-    $username = 'root';
-    $password = 'pass';
+    $username = 'petrocollector';
+    $password = 'ejyjynepa';
 
-    $conn = new PDO('mysql:host=localhost;dbname=nung_admiss-rating', $username, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $conn = new PDO('mysql:host=localhost;dbname=other_petrocollector', $username, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 

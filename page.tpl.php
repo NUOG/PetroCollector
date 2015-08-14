@@ -1,3 +1,9 @@
+<?php
+
+require("function.php");
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,11 +11,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Петрофізичні дослідження фільтраційно-ємнісних властивостей порід колекторів</title>
-  <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="vendor/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css">
-  <script type="text/javascript" src="vendor/components/jquery/jquery.min.js"></script>
+	<link rel="stylesheet" href="vendor/cross-solution/bootstrap3-dialog/dist/css/bootstrap-dialog.css">
+	<script type="text/javascript" src="vendor/components/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="vendor/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="vendor/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="vendor/cross-solution/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 
@@ -172,14 +181,12 @@
       </label>
       <div class="input-group">
       <select class="form-control selectpicker show-tick" name="research">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
+	<?php
+	  getTablesName();
+	?>
       </select>
       <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">
+        <button class="btn btn-default" id="upload-modal-form">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
       </span>
@@ -187,11 +194,11 @@
 
       <br />
       <div class="btn-grout pull-right">
-        <button type="button" class="btn btn-default">
+        <button type="button" class="btn btn-default" id="clear-form">
           <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
           Очистити дані
         </button>
-        <button type="button" class="btn btn-success">
+        <button type="button" class="btn btn-success" id="send-data">
           <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
           Порахувати
         </button>
@@ -234,6 +241,7 @@
 </footer>
   
 </div> <!-- end .container -->
+
 
 
 
