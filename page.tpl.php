@@ -137,11 +137,11 @@ require("function.php");
 
       <!-- dep 6 -->
     <label class="control-label">
-      Залежність К<sub>пр.еф</sub> і К<sub>пр.еф</sub>
+      Залежність К<sub>п.еф</sub> і К<sub>пр.еф</sub>
     </label>
     <div class="form-group">
       <label class="radio-inline">
-        <input type="radio" name="dependence-radio-1" id="dependence-radio-1" value="1"> К<sub>пр.еф</sub>
+        <input type="radio" name="dependence-radio-1" id="dependence-radio-1" value="1"> К<sub>п.еф</sub>
       </label>
       <label class="radio-inline">
         <input type="radio" name="dependence-radio-2" id="dependence-radio-2" value="2"> К<sub>пр.еф</sub>
@@ -215,7 +215,7 @@ require("function.php");
   </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default panel-table-data">
   <div class="panel-heading">
     <h3 class="panel-title">Табличні значення</h3>
   </div>
@@ -225,7 +225,7 @@ require("function.php");
 
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default panel-charts">
   <div class="panel-heading">
     <h3 class="panel-title">Графіки</h3>
   </div>

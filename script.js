@@ -19,5 +19,10 @@ $(document).ready(function() {
 	return false; 
   });
 
+  $('#send-data').click(function () {
+    $('.panel-charts').find('.panel-body').empty();
+    $('.panel-charts').find('.panel-body').load('data.php?data=insertGraphics', function() {
+    });
+  });
 
 });
