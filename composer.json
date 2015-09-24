@@ -7,7 +7,8 @@
         "components/jquery": "^2.1",
         "league/csv": "~7.1",
         "bootstrap-select/bootstrap-select": "^1.7",
-        "cross-solution/bootstrap3-dialog": "dev-master"
+        "cross-solution/bootstrap3-dialog": "dev-master",
+        "gregwar/tex2png": "dev-master"
     },
     "license": "MIT",
     "authors": [
