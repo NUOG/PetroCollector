@@ -8,6 +8,10 @@ parseUrl();
 
 function parseUrl(){
 // print_r ($_GET);
+
+//    $relation[] = checkRelation();
+//    var_dump($relation);
+
     switch ($_GET['graph']) {
 	case 'graph1': {
 	  drawGraph1();
@@ -19,11 +23,27 @@ function parseUrl(){
 
     switch ($_GET['data']) {
 	case 'insertGraphics': {
-	  insertGraphics();
+	  insertGraphics($relation);
 	  break;
 	}
 	//default: {echo "error"; break; }
     }
+}
+
+function checkRelation() {
+  //$rel[];
+
+  for ($i=1; $i <= 7; $i++) {
+    $relName = 'dependence-chb-' . $i;
+    if ($_GET[$relName] == 'on') {
+       $rel[$i] = 1;
+    } else {
+       $rel[$i] = 0;
+    }
+  }
+
+  return $rel;
+
 }
 
 function drawGraph1() {
@@ -59,45 +79,12 @@ $graph->Stroke();
 
 function insertGraphics() {
 
-  if ($_GET['dependence-chb-1'] == 'on') {
-    $number = 1;
-    insertGraphic($number);
-    insertTableRow($number);
-  }
-  if ($_GET['dependence-chb-2'] == 'on') {
-    $number = 2;
-    insertGraphic($number);
-    insertTableRow($number);
-  }
+$relation = checkRelation();
 
-  if ($_GET['dependence-chb-3'] == 'on') {
-    $number = 3;
-    insertGraphic($number);
-    insertTableRow($number);
-  }
-
-  if ($_GET['dependence-chb-4'] == 'on') {
-    $number = 4;
-    insertGraphic($number);
-    insertTableRow($number);
-  }
-
-  if ($_GET['dependence-chb-5'] == 'on') {
-    $number = 5;
-    insertGraphic($number);
-    insertTableRow($number);
-  }
-
-  if ($_GET['dependence-chb-6'] == 'on') {
-    $number = 6;
-    insertGraphic($number);
-    insertTableRow($number);
-  }
-
-  if ($_GET['dependence-chb-7'] == 'on') {
-    $number = 7;
-    insertGraphic($number);
-    insertTableRow($number);
+  for ($i = 1; $i <= 7; $i++) {
+    if ($relation[$i] == 1) {
+      insertGraphic($i);
+    }
   }
 
 
