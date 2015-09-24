@@ -21,7 +21,11 @@ $(document).ready(function() {
 
   $('#send-data').click(function () {
     $('.panel-charts').find('.panel-body').empty();
-    $('.panel-charts').find('.panel-body').load('data.php?data=insertGraphics', function() {
+    var formData = $('#PetroCollectorForm').serialize();
+    $('.panel-charts').find('.panel-body').load('data.php?data=insertGraphics', formData, function() {
+	$('html, body').animate({
+          scrollTop: $('.panel-charts').offset().top
+	}, 1000);
     });
   });
 
