@@ -2,7 +2,7 @@
 
 // require_once("vendor/jpgraph/jpgraph/lib/JpGraph/src")
 
-//require_once ("function.php");
+require_once ("function.php");
 
 parseUrl();
 
@@ -24,6 +24,10 @@ function parseUrl(){
     switch ($_GET['data']) {
 	case 'insertGraphics': {
 	  insertGraphics($relation);
+	  break;
+	}
+	case 'showTable': {
+	  showTable();
 	  break;
 	}
 	//default: {echo "error"; break; }
@@ -57,7 +61,6 @@ require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php');
 #require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_utils.inc.php');
 #require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php');
 
- 
 $datax = array(3.5,3.7,3,4,6.2,6,3.5,8,14,8,11.1,13.7);
 $datay = array(20,22,12,13,17,20,16,19,30,31,40,43);
  
@@ -87,11 +90,13 @@ $relation = checkRelation();
     }
   }
 
+var_dump (getTableData('stat-1'));
 
-
-  echo '<pre>';
-  var_dump($_GET); 
-  echo '</pre>';
+/*
+ * echo '<pre>';
+ * var_dump($_GET); 
+ * echo '</pre>';
+ */
 
 }
 

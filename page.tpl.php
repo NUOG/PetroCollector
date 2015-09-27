@@ -243,8 +243,6 @@ require("function.php");
 </div> <!-- end .container -->
 
 
-
-
 </body>
 </html>
 
