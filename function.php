@@ -1,5 +1,7 @@
 <?php
+
 require("config.php");
+
 error_reporting(-1);
 ini_set('display_errors', 'On');
 
@@ -44,11 +46,21 @@ function calculateAB($x,$y) {
 }
 
 function getTableData($tableName) {
+  try 
+  {
+
   global $conn;
-  $tables = $conn->prepare('SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`, `kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM ' . $tableName);
+  $sql ='SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`, `kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM `' . $tableName . '`'; 
+  $tables = $conn->prepare($sql);
 //  $tables->bindParam(':tableName', $tableName, PDO::PARAM_STR)
 // не можу забіндити назву таблиці через PDO. Дав на пряму... =(
+// виявляється це баг/фіса, що не можна забіндити назву таблиці =(
   $tables->execute();
+	}
+	catch (PDOEXCEPTION $e)
+	{
+		echo "Error: ".$e->getMessage();
+	}
 
   $i = 1;
   while ($row = $tables->fetch()) {

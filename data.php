@@ -11,7 +11,7 @@ function parseUrl(){
 
 //    $relation[] = checkRelation();
 //    var_dump($relation);
-
+  if (array_key_exists('graph', $_GET)) { 
     switch ($_GET['graph']) {
 	case 'graph1': {
 	  drawGraph1();
@@ -19,11 +19,12 @@ function parseUrl(){
 	}
 	//default: {echo "error"; break; }
     }
+  }
 
 
     switch ($_GET['data']) {
 	case 'insertGraphics': {
-	  insertGraphics($relation);
+	  insertGraphics();
 	  break;
 	}
 	case 'showTable': {
@@ -36,13 +37,15 @@ function parseUrl(){
 
 function checkRelation() {
   //$rel[];
-
+ 
   for ($i=1; $i <= 7; $i++) {
     $relName = 'dependence-chb-' . $i;
-    if ($_GET[$relName] == 'on') {
-       $rel[$i] = 1;
-    } else {
-       $rel[$i] = 0;
+    if (array_key_exists($relName, $_GET)) {
+      if ($_GET[$relName] == 'on') {
+         $rel[$i] = 1;
+      } else {
+         $rel[$i] = 0;
+      }
     }
   }
 
@@ -85,12 +88,14 @@ function insertGraphics() {
 $relation = checkRelation();
 
   for ($i = 1; $i <= 7; $i++) {
+   if (isset($relation[$i])) {
     if ($relation[$i] == 1) {
       insertGraphic($i);
     }
+   }
   }
 
-var_dump (getTableData('stat-1'));
+//var_dump (getTableData('stat-1'));
 
 /*
  * echo '<pre>';
