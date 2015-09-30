@@ -45,6 +45,84 @@ function calculateAB($x,$y) {
 
 }
 
+// Визначаємо коефіцієнт кореляції
+function corellationCoeficient($x,$y) {
+  $n = count($x);
+  $sumX = 0;
+  $sumY = 0;
+
+  for ($i = 1; $i <= $n; $i++) {
+    $sumX = $sumX + $x[$i];
+  }
+  for ($i = 1; $i <= $n; $i++) {
+    $sumY = $sumY + $y[$i];
+  }
+
+  $meanX = $sumX / $n;
+  $meanY = $sumY / $n;
+
+  $sumCXY = 0;
+  for ($i = 1; $i <= $n; $i++) {
+    $sumCXY = $sumCXY + ($x[$i] - $meanX) * ($y[$i] - $meanY);
+  }
+  $sumCX = 0;
+  for ($i = 1; $i <= $n; $i++) {
+    $sumCX = $sumCX + pow(($x[$i] - $meanX), 2);
+  }
+  $sumCY = 0;
+  for ($i = 1; $i <= $n; $i++) {
+    $sumCY = $sumCY + pow(($y[$i] - $meanY), 2);
+  }
+
+  $corellation = $sumCXY / pow(($sumX * $sumY) ,2);
+
+  return $corellation;
+
+}
+
+// Визначення оптимального рівняння
+function optimalEquation() {
+  
+}
+
+function optionsDepending($id) {
+  switch ($id) {
+    case: 1
+      $param1 = 'kp';
+      $param2 = 'kpd';
+      break;
+    case: 2
+      $param1 = 'kp';
+      $param2 = 'kpe';
+      break;
+    case: 3
+      $param1 = 'kpr';
+      $param2 = 'kpd';
+      break;
+    case: 4
+      $param1 = 'kpr';
+      $param2 = 'kpr8';
+      break;
+    case: 5
+      $param1 = 'kp';
+      $param2 = 'kpr8';
+      break;
+    case: 6
+      $param1 = 'kp';
+      $param2 = 'kpe';
+      break;
+    case: 7
+      $param1 = 'kpe';
+      $param2 = 'kpr8';
+      break;
+    case: 8
+      $param1 = 'kp';
+      $param2 = 'kpr';
+      break;
+      
+  }
+}
+
 function getTableData($tableName) {
   try 
   {
@@ -88,7 +166,8 @@ function showTable() {
   $tables->execute();
 
   $dataTable =<<<EOT
-<table>
+<table class="table">
+ <thead>
  <tr>
   <td>Kp</td>
   <td>Kpe</td>
@@ -99,6 +178,8 @@ function showTable() {
   <td>Kprv</td>
   <td>Kprg</td>
  </tr>
+ </thead>
+ <tbody>
 EOT;
  
   while ($row = $tables->fetch()) {
@@ -118,6 +199,7 @@ EOT;
   }
 
   $dataTable .=<<<EOT
+ </tbody>
 </table>
 EOT;
 
@@ -125,11 +207,11 @@ EOT;
 
 
 //  $tn = 'stat-1';
-  $GTD = getTableData('Вишнянське_стат_1');
-  $AB = calculateAB($GTD['kp'],$GTD['kpe']);
-echo "<pre>";
-var_dump($AB);
-echo "</pre>";
+//  $GTD = getTableData('Вишнянське_стат_1');
+//  $AB = calculateAB($GTD['kp'],$GTD['kpe']);
+//echo "<pre>";
+//var_dump($AB);
+//echo "</pre>";
 
 
 }

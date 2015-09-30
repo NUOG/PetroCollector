@@ -9,6 +9,8 @@ $(document).ready(function() {
 
   $('#clear-form').click(function() {
     clearForm();
+    $('.panel-charts').find('.panel-body').empty();
+    $('.panel-table-data').find('.panel-body').empty();
   });
 
   $('#upload-modal-form').click(function() {
@@ -20,8 +22,11 @@ $(document).ready(function() {
   });
 
   $('#send-data').click(function () {
+    $('.panel-table-data').find('.panel-body').empty();
     $('.panel-charts').find('.panel-body').empty();
+
     var formData = $('#PetroCollectorForm').serialize();
+    $('.panel-table-data').find('.panel-body').load('data.php?data=showTable', formData);
     $('.panel-charts').find('.panel-body').load('data.php?data=insertGraphics', formData, function() {
 	$('html, body').animate({
           scrollTop: $('.panel-charts').offset().top
