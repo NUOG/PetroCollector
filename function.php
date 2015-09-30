@@ -62,17 +62,17 @@ function getTableData($tableName) {
 		echo "Error: ".$e->getMessage();
 	}
 
-  $i = 1;
+  $i = 0;
   while ($row = $tables->fetch()) {
 
-    $DT['kp'][$i]   = $row['kp'];
-    $DT['kpe'][$i]  = $row['kpe'];
-    $DT['kpd'][$i]  = $row['kpd'];
-    $DT['kpr'][$i]  = $row['kpr'];
-    $DT['kpr8'][$i] = $row['kpr8'];
-    $DT['kprn'][$i] = $row['kprn'];
-    $DT['kprv'][$i] = $row['kprv'];
-    $DT['kprg'][$i] = $row['kprg'];
+    $DT['kp'][$i]   = (float)$row['kp'];
+    $DT['kpe'][$i]  = (float)$row['kpe'];
+    $DT['kpd'][$i]  = (float)$row['kpd'];
+    $DT['kpr'][$i]  = (float)$row['kpr'];
+    $DT['kpr8'][$i] = (float)$row['kpr8'];
+    $DT['kprn'][$i] = (float)$row['kprn'];
+    $DT['kprv'][$i] = (float)$row['kprv'];
+    $DT['kprg'][$i] = (float)$row['kprg'];
 
     $i++;
   }

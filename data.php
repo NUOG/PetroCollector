@@ -14,6 +14,7 @@ function parseUrl(){
   if (array_key_exists('graph', $_GET)) { 
     switch ($_GET['graph']) {
 	case 'graph1': {
+          //$_GET['research'] = 'stat-1';          
 	  drawGraph1();
 	  break;
 	}
@@ -22,6 +23,7 @@ function parseUrl(){
   }
 
 
+  if (array_key_exists('data', $_GET)) { 
     switch ($_GET['data']) {
 	case 'insertGraphics': {
 	  insertGraphics();
@@ -33,12 +35,13 @@ function parseUrl(){
 	}
 	//default: {echo "error"; break; }
     }
+  }
 }
 
 function checkRelation() {
-  //$rel[];
+  $rel['1']='';
  
-  for ($i=1; $i <= 7; $i++) {
+  for ($i=1; $i <= 8; $i++) {
     $relName = 'dependence-chb-' . $i;
     if (array_key_exists($relName, $_GET)) {
       if ($_GET[$relName] == 'on') {
@@ -48,7 +51,7 @@ function checkRelation() {
       }
     }
   }
-
+//var_dump($rel);
   return $rel;
 
 }
@@ -63,19 +66,39 @@ require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php');
 #include "vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php";
 #require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_utils.inc.php');
 #require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php');
+//echo $_GET['research'];
+$GDT = getTableData('stat-1');
 
-$datax = array(3.5,3.7,3,4,6.2,6,3.5,8,14,8,11.1,13.7);
-$datay = array(20,22,12,13,17,20,16,19,30,31,40,43);
+//echo "<pre>";
+//var_dump($GDT);
+//echo "</pre>";
+//settype($GDT['kp'], 'float');
+//settype($GDT['kpe'], 'float');
+//$GDT['kp']['0'] = 0;
+//$GDT['kpe']['0'] = 0;
+
+//for ($i = 1; $i <= count($GDT['kp']); $i++) {
+//  $datax[$i-1] = (float)$GDT['kp'][$i];
+//  $datay[$i-1] = (float)$GDT['kpe'][$i];
+//}
+$datax = $GDT['kp'];
+$datay = $GDT['kpe'];
+
+//$datax = array(3.5,3.7,3,4,6.2,6,3.5,8,14,8,11.1,13.7);
+//$datay = array(20,22,12,13,17,20,16,19,30,31,40,43);
  
 $graph = new Graph(400,400);
 $graph->SetScale("linlin");
  
-$graph->img->SetMargin(30,30,30,30);        
+$graph->img->SetMargin(60,30,30,30);        
 $graph->SetShadow();
  
 $graph->title->Set("Тестовий графік");
 //$graph->title->SetFont(DejaVuSans);
- 
+
+$graph->yaxis->title->Set('Кп');
+$graph->xaxis->title->Set('Кпд');
+
 $sp1 = new ScatterPlot($datay,$datax);
  
 $graph->Add($sp1);
@@ -87,13 +110,14 @@ function insertGraphics() {
 
 $relation = checkRelation();
 
-  for ($i = 1; $i <= 7; $i++) {
+  for ($i = 1; $i <= 8; $i++) {
    if (isset($relation[$i])) {
     if ($relation[$i] == 1) {
       insertGraphic($i);
     }
    }
   }
+
 
 //var_dump (getTableData('stat-1'));
 
@@ -121,6 +145,11 @@ $graphics = <<<EOT
 EOT;
 
   echo $graphics; 
+/*
+ * echo '<pre>';
+ * var_dump($_GET); 
+ * echo '</pre>';
+ */
 }
 
 

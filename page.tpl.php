@@ -112,17 +112,17 @@ require("function.php");
 
   		<!-- dep 4 -->
 		<label class="control-label">
-			Залежність К<sub>пр</sub> і К<sub>пр.еф</sub>
+			Залежність К<sub>пр</sub> і К<sub>п.еф</sub>
 		</label>
 		<div class="input-group">
 			<span class="input-group-addon">
 				<input type="checkbox" name="dependence-chb-4"> 
 			</span>
 			<input type="text" class="form-control" name="dependence-data-4">
-		</div><!-- /input-group -->  		
-  		<!-- dep 5 -->
+		</div><!-- /input-group -->  		  
+		<!-- dep 5 -->
 		<label class="control-label">
-			Залежність К<sub>п</sub> і К<sub>пр.еф</sub>
+			Залежність К<sub>пр</sub> і К<sub>пр.еф</sub>
 		</label>
 		<div class="input-group">
 			<span class="input-group-addon">
@@ -130,12 +130,22 @@ require("function.php");
 			</span>
 			<input type="text" class="form-control" name="dependence-data-5">
 		</div><!-- /input-group -->  		
+  		<!-- dep 6 -->
+		<label class="control-label">
+			Залежність К<sub>п</sub> і К<sub>пр.еф</sub>
+		</label>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<input type="checkbox" name="dependence-chb-6"> 
+			</span>
+			<input type="text" class="form-control" name="dependence-data-6">
+		</div><!-- /input-group -->  		
   		
   	</div>
 
     <div class="col-md-4">
 
-      <!-- dep 6 -->
+      <!-- dep 7 -->
     <label class="control-label">
       Залежність К<sub>п.еф</sub> і К<sub>пр.еф</sub>
     </label>
@@ -144,32 +154,32 @@ require("function.php");
         <input type="radio" name="dependence-radio-1" id="dependence-radio-1" value="1"> К<sub>п.еф</sub>
       </label>
       <label class="radio-inline">
-        <input type="radio" name="dependence-radio-2" id="dependence-radio-2" value="2"> К<sub>пр.еф</sub>
+        <input type="radio" name="dependence-radio-1" id="dependence-radio-2" value="2"> К<sub>пр.еф</sub>
       </label>    
     </div>  
-    <div class="input-group">
-      <span class="input-group-addon">
-        <input type="checkbox" name="dependence-chb-6"> 
-      </span>
-      <input type="text" class="form-control" name="dependence-data-6">
-    </div><!-- /input-group -->     
-      <!-- dep 7 -->
-    <label class="control-label">
-      Залежність К<sub>п</sub> і К<sub>пр</sub>
-    </label>
-    <div class="form-group">
-      <label class="radio-inline">
-        <input type="radio" name="dependence-radio-3" id="dependence-radio-3" value="3"> К<sub>п</sub>
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="dependence-radio-4" id="dependence-radio-4" value="4"> К<sub>пр</sub>
-      </label>    
-    </div>      
     <div class="input-group">
       <span class="input-group-addon">
         <input type="checkbox" name="dependence-chb-7"> 
       </span>
       <input type="text" class="form-control" name="dependence-data-7">
+    </div><!-- /input-group -->     
+      <!-- dep 8 -->
+    <label class="control-label">
+      Залежність К<sub>п</sub> і К<sub>пр</sub>
+    </label>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input type="radio" name="dependence-radio-2" id="dependence-radio-3" value="3"> К<sub>п</sub>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="dependence-radio-2" id="dependence-radio-4" value="4"> К<sub>пр</sub>
+      </label>    
+    </div>      
+    <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" name="dependence-chb-8"> 
+      </span>
+      <input type="text" class="form-control" name="dependence-data-8">
     </div><!-- /input-group -->     
       
     </div>
@@ -217,7 +227,7 @@ require("function.php");
 
 <div class="panel panel-default panel-table-data">
   <div class="panel-heading">
-    <h3 class="panel-title">Табличні значення</h3>
+    <h3 class="panel-title">Зведена таблиця розрахунків</h3>
   </div>
   <div class="panel-body">
 
@@ -227,7 +237,7 @@ require("function.php");
 
 <div class="panel panel-default panel-charts">
   <div class="panel-heading">
-    <h3 class="panel-title">Графіки</h3>
+    <h3 class="panel-title">Графічні залежності</h3>
   </div>
   <div class="panel-body">
 
