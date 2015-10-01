@@ -82,63 +82,66 @@ function corellationCoeficient($x,$y) {
 
 // Визначення оптимального рівняння
 function optimalEquation() {
-  
+  //  
 }
 
 function optionsDepending($id) {
   switch ($id) {
-    case: 1
+    case 1:
       $param1 = 'kp';
       $param2 = 'kpd';
       break;
-    case: 2
+    case 2:
       $param1 = 'kp';
       $param2 = 'kpe';
       break;
-    case: 3
+    case 3:
       $param1 = 'kpr';
       $param2 = 'kpd';
       break;
-    case: 4
+    case 4:
       $param1 = 'kpr';
       $param2 = 'kpr8';
       break;
-    case: 5
+    case 5:
       $param1 = 'kp';
       $param2 = 'kpr8';
       break;
-    case: 6
+    case 6:
       $param1 = 'kp';
       $param2 = 'kpe';
       break;
-    case: 7
+    case 7:
       $param1 = 'kpe';
       $param2 = 'kpr8';
       break;
-    case: 8
+    case 8:
       $param1 = 'kp';
       $param2 = 'kpr';
       break;
-      
   }
+
+  $result['param1'] = $param1;
+  $result['param2'] = $param2;
+  return $result;
+
 }
 
 function getTableData($tableName) {
   try 
   {
-
-  global $conn;
-  $sql ='SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`, `kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM `' . $tableName . '`'; 
-  $tables = $conn->prepare($sql);
+    global $conn;
+    $sql ='SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`, `kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM `' . $tableName . '`'; 
+    $tables = $conn->prepare($sql);
 //  $tables->bindParam(':tableName', $tableName, PDO::PARAM_STR)
 // не можу забіндити назву таблиці через PDO. Дав на пряму... =(
 // виявляється це баг/фіса, що не можна забіндити назву таблиці =(
-  $tables->execute();
-	}
-	catch (PDOEXCEPTION $e)
-	{
-		echo "Error: ".$e->getMessage();
-	}
+    $tables->execute();
+  }
+    catch (PDOEXCEPTION $e)
+  {
+    echo "Error: ".$e->getMessage();
+  }
 
   $i = 0;
   while ($row = $tables->fetch()) {
@@ -160,9 +163,10 @@ function getTableData($tableName) {
 }
 
 
-function showTable() {
+function showTable($tableName) {
   global $conn;
-  $tables = $conn->prepare('SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`, `kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM `Вишнянське_стат_1`');
+  $sql ='SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`, `kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM `' . $tableName . '`'; 
+  $tables = $conn->prepare($sql);
   $tables->execute();
 
   $dataTable =<<<EOT

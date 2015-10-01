@@ -30,7 +30,7 @@ function parseUrl(){
 	  break;
 	}
 	case 'showTable': {
-	  showTable();
+	  showTable($_GET['research']);
 	  break;
 	}
 	//default: {echo "error"; break; }
