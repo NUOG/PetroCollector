@@ -21,16 +21,16 @@ function calculateAB($x,$y) {
   $sumY  = 0;
   $sumX2 = 0;
   $n     = count($x);
-  for ($i = 1; $i <= $n; $i++) {
-    $sumXY = $sumXY + $x[$i] + $y[$i];
+  for ($i = 0; $i < $n; $i++) {
+    $sumXY = $sumXY + $x[$i] * $y[$i];
   }
-  for ($i = 1; $i <= $n; $i++) {
+  for ($i = 0; $i < $n; $i++) {
     $sumX = $sumX + $x[$i];
   }
-  for ($i = 1; $i <= $n; $i++) {
+  for ($i = 0; $i < $n; $i++) {
     $sumY = $sumY + $y[$i];
   }
-  for ($i = 1; $i <= $n; $i++) {
+  for ($i = 0; $i < $n; $i++) {
     $sumX2 = $sumX2 + pow($x[$i], 2);
   }
   
@@ -51,10 +51,10 @@ function corellationCoeficient($x,$y) {
   $sumX = 0;
   $sumY = 0;
 
-  for ($i = 1; $i <= $n; $i++) {
+  for ($i = 0; $i < $n; $i++) {
     $sumX = $sumX + $x[$i];
   }
-  for ($i = 1; $i <= $n; $i++) {
+  for ($i = 0; $i < $n; $i++) {
     $sumY = $sumY + $y[$i];
   }
 
@@ -62,19 +62,19 @@ function corellationCoeficient($x,$y) {
   $meanY = $sumY / $n;
 
   $sumCXY = 0;
-  for ($i = 1; $i <= $n; $i++) {
+  for ($i = 0; $i < $n; $i++) {
     $sumCXY = $sumCXY + ($x[$i] - $meanX) * ($y[$i] - $meanY);
   }
   $sumCX = 0;
-  for ($i = 1; $i <= $n; $i++) {
+  for ($i = 0; $i < $n; $i++) {
     $sumCX = $sumCX + pow(($x[$i] - $meanX), 2);
   }
   $sumCY = 0;
-  for ($i = 1; $i <= $n; $i++) {
+  for ($i = 0; $i < $n; $i++) {
     $sumCY = $sumCY + pow(($y[$i] - $meanY), 2);
   }
 
-  $corellation = $sumCXY / pow(($sumX * $sumY) ,2);
+  $corellation = $sumCXY / sqrt($sumCX * $sumCY);
 
   return $corellation;
 
@@ -127,6 +127,13 @@ function optionsDepending($id) {
 
 }
 
+// рівняння залежностей
+
+function equationDep1($a, $b, $x, $minX, $minY, $maxX, $maxY) {
+  //
+}
+
+
 function getTableData($tableName) {
   try 
   {
@@ -160,6 +167,57 @@ function getTableData($tableName) {
 
   return $DT;
 
+}
+
+function showTableDependings($tableName) {
+
+  $GTD = getTableData($tableName);
+
+  $corelCoeficient = corellationCoeficient($GTD['kpe'], $GTD['kp']);
+  $CAB = calculateAB ($GTD['kpe'], $GTD['kp']);
+  $A = $CAB['A'];
+  $B = $CAB['B'];
+  $corelCoeficient = number_format($corelCoeficient, 2);
+  $functionText = "Кп = " . number_format($A, 2) . " * Кп.еф + " . number_format($B, 2) ;
+  $umovaRoz = $_GET['dependence-data-2'];
+  $granychParam = number_format(($A * $umovaRoz + $B), 2);
+//  $x1 = array(0, 12);
+//  $y1 = array(6.58, 22.78);
+
+  $dataTable =<<<EOT
+<table class="table">
+ <thead>
+ <tr>
+  <td>№</td>
+  <td>Рівняння</td>
+  <td>Умова розрахунку</td>
+  <td>Граничний параметр</td>
+  <td>Значення граничного параметру</td>
+  <td>Коеф. кореляції</td>
+ </tr>
+ </thead>
+ <tbody>
+EOT;
+
+  $dataTable .=<<<EOT
+ <tr>
+  <td>1</td>
+  <td>$functionText</td>
+  <td>$umovaRoz</td>
+  <td>Кп</td>
+  <td>$granychParam</td>
+  <td>$corelCoeficient</td>
+ </tr>
+EOT;
+
+  $dataTable .=<<<EOT
+ </tbody>
+</table>
+EOT;
+
+  echo $dataTable;
+
+ 
 }
 
 

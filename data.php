@@ -15,7 +15,8 @@ function parseUrl(){
     switch ($_GET['graph']) {
 	case 'graph1': {
           //$_GET['research'] = 'stat-1';          
-	  drawGraph1();
+	  //drawGraph1();
+	  drawGraph($_GET['tableName']);
 	  break;
 	}
 	//default: {echo "error"; break; }
@@ -30,7 +31,7 @@ function parseUrl(){
 	  break;
 	}
 	case 'showTable': {
-	  showTable($_GET['research']);
+	  showTableDependings($_GET['research']);
 	  break;
 	}
 	//default: {echo "error"; break; }
@@ -67,7 +68,7 @@ require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php');
 #require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_utils.inc.php');
 #require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php');
 //echo $_GET['research'];
-$GDT = getTableData('stat-1');
+$GDT = getTableData('Вишнянське_стат_1');
 
 //echo "<pre>";
 //var_dump($GDT);
@@ -93,15 +94,51 @@ $graph->SetScale("linlin");
 $graph->img->SetMargin(60,30,30,30);        
 $graph->SetShadow();
  
-$graph->title->Set("Тестовий графік");
+$graph->title->Set("Залежність між Кп та Кпе");
 //$graph->title->SetFont(DejaVuSans);
 
 $graph->yaxis->title->Set('Кп');
-$graph->xaxis->title->Set('Кпд');
+$graph->xaxis->title->Set('Кпе');
 
 $sp1 = new ScatterPlot($datay,$datax);
  
 $graph->Add($sp1);
+$graph->Stroke();
+  
+}
+
+// 
+function drawGraph($tableName) {
+
+require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph.php');
+require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php');
+
+$GDT = getTableData($tableName);
+
+$datax = $GDT['kp'];
+$datay = $GDT['kpe'];
+
+  $x1 = array(0, 12);
+  $y1 = array(6.58, 22.78);
+
+$graph = new Graph(400,400);
+$graph->SetScale("linlin");
+ 
+$graph->img->SetMargin(60,30,30,30);
+//$graph->img->SetPadding(10,10,10,10)
+$graph->SetShadow();
+ 
+$graph->title->Set("Залежність між Кп та Кпе");
+//$graph->title->SetFont(DejaVuSans);
+
+$graph->yaxis->title->Set('Кп');
+$graph->xaxis->title->Set('Кпе');
+
+$sp1 = new ScatterPlot($datay,$datax);
+$sp2 = new ScatterPlot($x,$y);
+ 
+$graph->Add($sp1);
+$graph->Add($sp2);
 $graph->Stroke();
   
 }
@@ -132,13 +169,14 @@ $relation = checkRelation();
 function insertGraphic($chartNumber) {
  
   $chartTitle = 'Графік #' . $chartNumber;
+  $tableName = $_GET['research'];
 
 $graphics = <<<EOT
 
 <div class="panel panel-default col-md-6">
   <div class="panel-body">
     <h3 class="panel-title"> $chartTitle </h3>
-    <img src="data.php?graph=graph1" alt="Graphic 1" class="img-responsive" />
+    <img src="data.php?graph=graph1&tableName=$tableName" alt="Graphic 1" class="img-responsive" />
   </div>
 </div>
 
