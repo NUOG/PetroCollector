@@ -112,6 +112,7 @@ function drawGraph($tableName) {
 
 require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph.php');
 require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php');
+require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_line.php');
 
 $GDT = getTableData($tableName);
 
@@ -135,10 +136,15 @@ $graph->yaxis->title->Set('Кп');
 $graph->xaxis->title->Set('Кпе');
 
 $sp1 = new ScatterPlot($datay,$datax);
-$sp2 = new ScatterPlot($x,$y);
- 
+
+$sp2 = new LinePlot($x1,$y1);
+
 $graph->Add($sp1);
 $graph->Add($sp2);
+
+$sp2->SetColor("#f00");
+$sp2->SetWeight(2);
+
 $graph->Stroke();
   
 }
