@@ -16,6 +16,7 @@ function parseUrl(){
 	case 'graph1': {
           //$_GET['research'] = 'stat-1';          
 	  //drawGraph1();
+    //dependingDefenition();
 	  drawGraph($_GET['tableName']);
 	  break;
 	}
@@ -113,6 +114,7 @@ function drawGraph($tableName) {
 require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph.php');
 require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_scatter.php');
 require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_line.php');
+require_once ('vendor/jpgraph/jpgraph/lib/JpGraph/src/jpgraph_utils.inc.php');
 
 $GDT = getTableData($tableName);
 
@@ -121,6 +123,9 @@ $datay = $GDT['kpe'];
 
   $x1 = array(0, 12);
   $y1 = array(6.58, 22.78);
+
+// $f = new FuncGenerator('cos($x)+1.5*cos(2*$x)');
+// list($x1,$y1) = $f->E(0,10);
 
 $graph = new Graph(400,400);
 $graph->SetScale("linlin");

@@ -15,6 +15,7 @@ function getTablesName() {
   
 }
 
+// визначити коефіцієнти A та B
 function calculateAB($x,$y) {
   $sumXY = 0;
   $sumX  = 0;
@@ -46,7 +47,7 @@ function calculateAB($x,$y) {
 }
 
 // Визначаємо коефіцієнт кореляції
-function corellationCoeficient($x,$y) {
+function corellationCoeficient($x, $y, $equalID = 1) {
   $n = count($x);
   $sumX = 0;
   $sumY = 0;
@@ -58,9 +59,10 @@ function corellationCoeficient($x,$y) {
     $sumY = $sumY + $y[$i];
   }
 
-  $meanX = $sumX / $n;
-  $meanY = $sumY / $n;
+  $meanX = $sumX / $n; // середнє арифм. X
+  $meanY = $sumY / $n; // середнє арифм. Y
 
+  // сума добутків X*Y
   $sumCXY = 0;
   for ($i = 0; $i < $n; $i++) {
     $sumCXY = $sumCXY + ($x[$i] - $meanX) * ($y[$i] - $meanY);
@@ -74,15 +76,35 @@ function corellationCoeficient($x,$y) {
     $sumCY = $sumCY + pow(($y[$i] - $meanY), 2);
   }
 
-  $corellation = $sumCXY / sqrt($sumCX * $sumCY);
+  switch ($equalID) {
+    case 1:
+      $corellation['value'] = $sumCXY / sqrt($sumCX * $sumCY);
+      $corellation['id'] = 1;
+      break;
+    case 2:
+      $corellation['value'] = $sumCXY / sqrt($sumCX * $sumCY);
+      $corellation['id'] = 2;
+      break;
+  }
+  
 
   return $corellation;
 
 }
 
 // Визначення оптимального рівняння
-function optimalEquation() {
-  //  
+function optimalEquation($argument) {
+  $max = $argument['0'];
+  $number = 0;
+  for ($i = 0; $i < count($argument); $i++) {
+    if ($min < $argument[$i]) {
+      $min = $argument[$i];
+      $number = $i;
+    }
+  }
+  $result['max'] = $max;
+  $result['number'] = $number;
+  return $result;
 }
 
 function optionsDepending($id) {
@@ -111,18 +133,18 @@ function optionsDepending($id) {
       $param1 = 'kp';
       $param2 = 'kpe';
       break;
-    case 7:
+    case 7: // Якщо вибрані радіобокси, то перевірити що від чого залежить
       $param1 = 'kpe';
       $param2 = 'kpr8';
       break;
-    case 8:
+    case 8: // те саме, що у 7-му пункті
       $param1 = 'kp';
       $param2 = 'kpr';
       break;
   }
 
-  $result['param1'] = $param1;
-  $result['param2'] = $param2;
+  $result['x'] = $param1;
+  $result['y'] = $param2;
   return $result;
 
 }
@@ -138,7 +160,8 @@ function getTableData($tableName) {
   try 
   {
     global $conn;
-    $sql ='SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`, `kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM `' . $tableName . '`'; 
+    $sql ='SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`, ' . 
+          '`kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM `' . $tableName . '`'; 
     $tables = $conn->prepare($sql);
 //  $tables->bindParam(':tableName', $tableName, PDO::PARAM_STR)
 // не можу забіндити назву таблиці через PDO. Дав на пряму... =(
@@ -171,19 +194,6 @@ function getTableData($tableName) {
 
 function showTableDependings($tableName) {
 
-  $GTD = getTableData($tableName);
-
-  $corelCoeficient = corellationCoeficient($GTD['kpe'], $GTD['kp']);
-  $CAB = calculateAB ($GTD['kpe'], $GTD['kp']);
-  $A = $CAB['A'];
-  $B = $CAB['B'];
-  $corelCoeficient = number_format($corelCoeficient, 2);
-  $functionText = "Кп = " . number_format($A, 2) . " * Кп.еф + " . number_format($B, 2) ;
-  $umovaRoz = $_GET['dependence-data-2'];
-  $granychParam = number_format(($A * $umovaRoz + $B), 2);
-//  $x1 = array(0, 12);
-//  $y1 = array(6.58, 22.78);
-
   $dataTable =<<<EOT
 <table class="table">
  <thead>
@@ -199,6 +209,20 @@ function showTableDependings($tableName) {
  <tbody>
 EOT;
 
+  $GTD = getTableData($tableName);
+
+  $corelCoeficient = corellationCoeficient($GTD['kpe'], $GTD['kp']);
+  $CAB = calculateAB ($GTD['kpe'], $GTD['kp']);
+  $A = $CAB['A'];
+  $B = $CAB['B'];
+  $corelCoeficientValue = number_format($corelCoeficient['value'], 2);
+  $corelCoeficientID = number_format($corelCoeficient['id'], 2);
+  $functionText = "Кп = " . number_format($A, 2) . " * Кп.еф + " . number_format($B, 2) ;
+  $umovaRoz = $_GET['dependence-data-2'];
+  $granychParam = number_format(($A * $umovaRoz + $B), 2);
+//  $x1 = array(0, 12);
+//  $y1 = array(6.58, 22.78);
+
   $dataTable .=<<<EOT
  <tr>
   <td>1</td>
@@ -206,7 +230,7 @@ EOT;
   <td>$umovaRoz</td>
   <td>Кп</td>
   <td>$granychParam</td>
-  <td>$corelCoeficient</td>
+  <td>$corelCoeficientValue</td>
  </tr>
 EOT;
 
@@ -223,7 +247,8 @@ EOT;
 
 function showTable($tableName) {
   global $conn;
-  $sql ='SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`, `kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM `' . $tableName . '`'; 
+  $sql ='SELECT `firstColumn`, `secondColumn`, `thirdColumn`, `fourthColumn`,' . 
+        ' `kp`, `kpe`, `kpd`, `kpr`, `kpr8`, `kprn`, `kprv`, `kprg` FROM `' . $tableName . '`'; 
   $tables = $conn->prepare($sql);
   $tables->execute();
 
